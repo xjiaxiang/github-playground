@@ -13,6 +13,7 @@
 	"license": "ISC",
 	"packageManager": "pnpm@10.6.5",
 	"devDependencies": {
-		"danger": "^13.0.5"
+		"danger": "^13.0.5",
+		"typescript": "4"
 	}
 }
