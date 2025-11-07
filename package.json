@@ -1,13 +1,18 @@
 {
-  "name": "github-playground",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.6.5"
+	"name": "github-playground",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"pr": "pnpm danger local",
+		"pr:ci": "pnpm danger ci"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.6.5",
+	"devDependencies": {
+		"danger": "^13.0.5"
+	}
 }
