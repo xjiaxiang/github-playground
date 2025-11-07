@@ -2,11 +2,15 @@
 	"name": "github-playground",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"type": "module",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"pr": "pnpm danger local",
-		"pr:ci": "pnpm danger ci"
+		"pr": "pnpm danger ci",
+		"build": "astro build",
+		"lint": "echo \"Lint Finished\" && exit 0",
+		"fmt": "echo \"Format Finished\" && exit 0",
+		"test": "echo \"Test Finished\" && exit 0",
+		"deploy:preview": "echo \"Deploy Preview Finished\" && exit 0",
+		"deploy": "echo \"Deploy Finished\" && exit 0"
 	},
 	"keywords": [],
 	"author": "",
@@ -15,5 +19,8 @@
 	"devDependencies": {
 		"danger": "^13.0.5",
 		"typescript": "4"
+	},
+	"dependencies": {
+		"astro": "^5.15.4"
 	}
 }
