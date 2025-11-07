@@ -2,7 +2,11 @@ name: PR Review
 
 on:
   pull_request:
+    branches: [main, develop]
     types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
 
 env:
   NODE_VERSION: "22"
@@ -13,7 +17,7 @@ permissions:
   issues: write # comment on issues
 
 jobs:
-  validation:
+  check:
     name: PR Validation
     runs-on: ubuntu-latest
     steps:
@@ -31,6 +35,18 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Lint Check
+        run: pnpm run lint
+
+      - name: Format Check
+        run: pnpm run fmt
+
+      - name: Run tests
+        run: pnpm run test
+
+      - name: Build project
+        run: pnpm run build
 
       - name: Check PR validation
         run: pnpm run pr
