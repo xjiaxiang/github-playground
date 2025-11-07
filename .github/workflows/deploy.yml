@@ -67,15 +67,3 @@ jobs:
 
       - name: Deploy Production
         run: pnpm run deploy
-
-      - name: Create deployment status
-        uses: actions/github-script@v8
-        with:
-          script: |
-            await github.rest.repos.createDeploymentStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              deployment_id: context.payload.deployment?.id || 0,
-              state: 'success',
-              description: 'Deployment successful',
-            });
