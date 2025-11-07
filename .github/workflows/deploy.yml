@@ -3,6 +3,8 @@ name: Deploy
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 env:
@@ -13,15 +15,17 @@ jobs:
     name: Deploy Preview
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
+    environment:
+      name: preview
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
@@ -30,17 +34,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: pnpm build
-        working-directory: examples/nextjs-todo-list
+        run: pnpm run build
 
-      # 如果使用 Vercel
-      # - name: Deploy to Vercel Preview
-      #   uses: amondnet/vercel-action@v25
-      #   with:
-      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-      #     scope: ${{ secrets.VERCEL_ORG_ID }}
+      - name: Deploy Preview
+        run: pnpm run deploy:preview
 
   deploy-production:
     name: Deploy Production
@@ -51,13 +48,13 @@ jobs:
       url: https://your-production-url.com
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
@@ -66,17 +63,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: pnpm build
+        run: pnpm run build
 
-      # 如果使用 Vercel
-      # - name: Deploy to Vercel Production
-      #   uses: amondnet/vercel-action@v25
-      #   with:
-      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-      #     vercel-args: '--prod'
-      #     scope: ${{ secrets.VERCEL_ORG_ID }}
+      - name: Deploy Production
+        run: pnpm run deploy
 
       - name: Create deployment status
         uses: actions/github-script@v8
