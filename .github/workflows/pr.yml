@@ -50,5 +50,6 @@ jobs:
 
       - name: Check
         run: pnpm run pr
+        if: github.event_name == 'pull_request'
         env:
           DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
