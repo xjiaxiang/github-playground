@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   check:
-    name: PR Validation
+    name: PR Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -48,7 +48,7 @@ jobs:
       - name: Build project
         run: pnpm run build
 
-      - name: Check PR validation
+      - name: Check
         run: pnpm run pr
         env:
           DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
