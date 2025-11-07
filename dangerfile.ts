@@ -8,13 +8,6 @@ message(`Additions: ${danger.github.pr.additions}`);
 message(`Deletions: ${danger.github.pr.deletions}`);
 message(`Total Changes: ${totalChanges}`);
 
-danger.github.setSummaryMarkdown(`
-## PR Size Analysis
-Additions: ${danger.github.pr.additions}
-Deletions: ${danger.github.pr.deletions}
-Total Changes: ${totalChanges}
-`);
-
 if (totalChanges > 1000) {
 	warn(
 		"⚠️ Large PR detected. Consider splitting it into smaller PRs for easier review."
@@ -31,3 +24,12 @@ if (danger.github.pr.body.length < 10) {
 		"⚠️ Please add a more detailed description to your PR. This helps reviewers understand the changes better."
 	);
 }
+
+// add action summary
+// https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/
+danger.github.setSummaryMarkdown(`
+  ## PR Size Analysis
+  Additions: ${danger.github.pr.additions}
+  Deletions: ${danger.github.pr.deletions}
+  Total Changes: ${totalChanges}
+`);
