@@ -11,8 +11,8 @@ env:
   NODE_VERSION: "22"
 
 jobs:
-  lint:
-    name: Lint & Format Check
+  lftb:
+    name: Lint & Format & Test & Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -36,46 +36,8 @@ jobs:
       - name: Format Check
         run: pnpm run fmt
 
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
       - name: Run tests
         run: pnpm run test
-
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
 
       - name: Build project
         run: pnpm run build
