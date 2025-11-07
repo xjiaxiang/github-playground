@@ -5,7 +5,7 @@
 <!-- Link to the related issue -->
 Closes #<!-- issue number -->
 
-## 🎯 Type of Change
+## 🎯 Type of Changep
 <!-- Mark the relevant option with an 'x' -->
 - [ ] 🐛 Bug fix (non-breaking change which fixes an issue)
 - [ ] ✨ New feature (non-breaking change which adds functionality)
