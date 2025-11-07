@@ -18,50 +18,6 @@ env:
   NODE_VERSION: "22"
 
 jobs:
-  build-preview:
-    name: Build Preview for GitHub Pages
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build project
-        run: pnpm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-  deploy-preview-pages:
-    name: Deploy Preview to GitHub Pages
-    runs-on: ubuntu-latest
-    needs: build-preview
-    if: github.event_name == 'pull_request'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
   build-production:
     name: Build Production for GitHub Pages
     runs-on: ubuntu-latest
