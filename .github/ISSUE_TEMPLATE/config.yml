@@ -4,5 +4,5 @@ contact_links:
     url: https://github.com/xjiaxiang/github-playground/discussions
     about: Ask questions and discuss with other community members
   - name: 🔒 Security Issue
-    url: https://github.com/xjiaxiang/github-playground/security/advisories/new
+    url: https://github.com/xjiaxiang/github-playground/security/policy
     about: Report a security vulnerability
